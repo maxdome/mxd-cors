@@ -2,7 +2,6 @@
   "name": "mxd-cors",
   "description": "Initialized cors middlewares for the maxdome devices",
   "version": "2.8.1",
-  "private": true,
   "readmeFilename": "README.md",
   "main": "src/lib.js",
   "scripts": {
