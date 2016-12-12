@@ -3,6 +3,7 @@
 const cors = require('cors');
 const _ = {
   mergeWith: require('lodash.mergewith'),
+  union: require('lodash.union'),
 };
 
 module.exports = (opts) => {
@@ -21,7 +22,7 @@ module.exports = (opts) => {
         opts,
         (objValue, srcValue) => {
           if (Array.isArray(objValue)) {
-            return objValue.concat(srcValue);
+            return _.union(objValue, srcValue);
           }
         }
       )
