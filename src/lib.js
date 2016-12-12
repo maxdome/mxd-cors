@@ -1,33 +1,30 @@
 'use strict';
 
 const cors = require('cors');
-
-function merge(a, b) {
-  const c = JSON.parse(JSON.stringify(a));
-  for (const k in b) {
-    if (Array.isArray(b[k]) && Array.isArray(c[k])) {
-      c[k] = c[k].concat(b[k]);
-    } else if (typeof b[k] === 'object' && typeof c[k] === 'object') {
-      c[k] = merge(c[k], b[k]);
-    } else {
-      c[k] = b[k];
-    }
-  }
-  return c;
-}
+const _ = {
+  mergeWith: require('lodash.mergewith'),
+};
 
 module.exports = (opts) => {
   opts = opts || {};
   return (req, res, next) => {
     cors(
-      merge({
-        origin: true,
-        credentials: true,
-        methods: ['GET', 'PUT', 'POST', 'DELETE'],
-        allowedHeaders: ['accept', 'content-type', 'platform', 'clienttype', 'x-device'],
-        maxAge: 3600,
-        optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-      }, opts)
+      _.mergeWith(
+        {
+          origin: true,
+          credentials: true,
+          methods: ['GET', 'PUT', 'POST', 'DELETE'],
+          allowedHeaders: ['accept', 'content-type', 'platform', 'clienttype', 'x-device'],
+          maxAge: 3600,
+          optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+        },
+        opts,
+        (objValue, srcValue) => {
+          if (Array.isArray(objValue)) {
+            return objValue.concat(srcValue);
+          }
+        }
+      )
     )(req, res, (err) => {
       if (err) {
         next(err);

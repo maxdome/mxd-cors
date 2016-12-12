@@ -1,14 +1,15 @@
 {
   "name": "mxd-cors",
   "description": "Initialized cors middlewares for the maxdome devices",
-  "version": "2.8.1",
+  "version": "2.9.0",
   "readmeFilename": "README.md",
   "main": "src/lib.js",
   "scripts": {
-    "lint": "eslint src"
+    "lint": "eslint src/"
   },
   "dependencies": {
-    "cors": "^2.8.1"
+    "cors": "^2.8.1",
+    "lodash.mergewith": "^4.6.0"
   },
   "devDependencies": {
     "eslint": "^3.5.0",
