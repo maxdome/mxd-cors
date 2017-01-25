@@ -30,7 +30,7 @@ module.exports = (opts) => {
       if (err) {
         next(err);
       } else {
-        const devices = ['Media/BP530', 'Media/BP540', 'Media/BH6430', 'Media/BP550', 'Media/BP730'];
+        const devices = ['Media/BP440', 'Media/BP530', 'Media/BP540', 'Media/BH6430', 'Media/BP550', 'Media/BP730'];
         if (req.headers['platform'] === 'ott' && req.headers['clienttype'] === 'lg_bd' && devices.indexOf(req.headers['x-device']) > -1) {
           res.setHeader('access-control-allow-origin', '*');
           res.removeHeader('access-control-allow-credentials');
