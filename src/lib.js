@@ -35,7 +35,7 @@ module.exports = (opts) => {
       const method = req.method && req.method.toUpperCase && req.method.toUpperCase();
       const devices = ['Media/BP440', 'Media/BP530', 'Media/BP540', 'Media/BH6430', 'Media/BP550', 'Media/BP730'];
 
-      if (req.headers['platform'] === 'ott' && req.headers['clienttype'] === 'lg_bd' && devices.indexOf(req.headers['x-device']) > -1) {
+      if (/^ott/i.test(req.headers['platform']) === 'ott' && req.headers['clienttype'] === 'lg_bd' && devices.indexOf(req.headers['x-device']) > -1) {
         res.setHeader('access-control-allow-origin', '*');
         res.removeHeader('access-control-allow-credentials');
       } else if (res.get('access-control-allow-origin') === undefined && res.get('access-control-allow-credentials') !== undefined) {
